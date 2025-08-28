@@ -12,6 +12,7 @@ This activity will help students:
 ---
 📘 Scenario:
 You’ve been hired to create a system that simulates file processing for a virtual library.
+nsert
 
 The system must:
 - Validate user input (file names and data)
@@ -43,21 +44,46 @@ Step 4: Test Your Solution
 // ============================================
 
 function processFile(fileName, fileData) {
+  let fileHandle = null;
+  let processData = null;
+
   try {
     // TODO: Add input validation here
-    
+    if (!fileName) {
+      throw new ReferenceError("File name is missing");
+    }
+    if (typeof fileData !== "string") {
+      throw new TypeError("File data must be a string");
+    }
+    if (fileData.trim() === "") {
+      throw new Error("File data cannot be empty");
+    }
     // TODO: Implement simulated file processing here
     console.log(`Processing file: ${fileName}`);
     console.log(`File content: ${fileData}`);
-    
+    console.log(`Opening file: ${fileName}`);
+    fileHandle = {}; 
     // TODO: Add simulated file operations (reading/writing)
-    
-  } catch (err) {
+    console.log("Reading file...");
+    console.log(`File content: ${fileData}`);
+    console.log("Processing data...");
+    processData = fileData.toUpperCase(); // assign to outer variable
+    console.log(`Saving processed content: ${processData}`);
+    console.log("File processed successfully!");
+  } 
+  catch (err) {
     // TODO: Implement error handling
-    console.error(err);
-  }
+    console.error("Error during file processing:", err.message);
+  } 
+  finally {
+  
   // TODO: Implement a finally block to close resources
-}
+if (fileHandle !== null) {
+      console.log("Closing file handle (simulated)...");
+      fileHandle = null;
+    }
+    console.log("Cleanup complete (finally executed).");
+  }
 
 // ============================================
 // 🧪 Test Cases Below
